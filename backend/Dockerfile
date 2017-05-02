@@ -1,7 +1,6 @@
 FROM node
-COPY . /usr/app
 WORKDIR /usr/app
+ADD . /usr/app
 RUN npm install
-EXPOSE 8888
-CMD ["node", "server.js"]
-
+EXPOSE 80
+CMD ["node", "src/server.js"]

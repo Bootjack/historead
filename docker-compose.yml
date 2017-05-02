@@ -1,0 +1,59 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb
+    environment:
+      # Changing these variables will not affect an existing volume.
+      # Remove the existing volume first and re-run compose to apply changes.
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: historead
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: historead
+    networks:
+      - webnet
+    ports:
+      - "3306:3306"
+    volumes:
+      - "db-data:/var/lib/mysql"
+
+  backend:
+    image: historead-backend
+    depends_on:
+      - db
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    networks:
+      - webnet
+    ports:
+      - "8000:80"
+    volumes:
+      # Map the host src directory to container src directory.
+      # Run `docker-compose restart backend` to pick up local file changes.
+      # This is only appropriate in a dev environment.
+      # Note: Find a sustainable strategy for this (like multiple yml files)
+      - ./backend/src:/usr/app/src
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - webnet
+
+volumes:
+  db-data:
+
+networks:
+  webnet:

@@ -11,6 +11,8 @@
   "dependencies": {
     "body-parser": "1.16.1",
     "express": "4.14.1",
-    "ioredis": "2.5.0"
+    "knex": "0.13.0",
+    "mysql": "2.13.0",
+    "sequelize": "3.30.4"
   }
 }
