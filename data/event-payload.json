@@ -1,0 +1,25 @@
+[{
+  "name": "George I",
+  "start": "1714-08-01",
+  "end": "1727-06-11"
+}, {
+  "name": "George II",
+  "start": "1727-06-11",
+  "end": "1760-10-25"
+}, {
+  "name": "George III",
+  "start": "1760-10-25",
+  "end": "1820-01-29"
+}, {
+  "name": "George IV",
+  "start": "1820-01-29",
+  "end": "1830-06-26"
+}, {
+  "name": "William IV",
+  "start": "1830-06-26",
+  "end": "1837-06-20"
+}, {
+  "name": "Victoria",
+  "start": "1837-06-20",
+  "end": "1901-01-22"
+}]
