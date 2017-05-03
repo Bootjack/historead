@@ -1,3 +1,17 @@
+## 2017-05-02 23:04
+JRH
+
+I focussed on using Knex to build the `events` table correctly and then writing `SELECT` and `INSERT` queries with it in the API.
+
+I also brought in `moment` to aid in date manipulation so that the API endpoint can fetch a range of dates with flexible date format support. Basically, I got tired of having to use YYYY-MM-DD dates all the time while testing out the API, especially since it involved a lot of `curl`ing.
+
+The current state of the API is encouraging, even considering how rudimentary its functionality is. The only thing that bugs me is I don't know exactly why the event dates in the response are full ISO strings; that could be from MariaDB, Knex, or Express. I think it's what I want, ultimately since it's easy for clients to consume as simple javascript `Date`s.
+
+### Next Up
+Knex appears to have pretty good support for database migrations, with CLI tools similar to `rake`. Figure out how to use them and then how to integrate them into a docker workflow so that it remains easy to recover to a known state when the database inevitably becomes corrupted.
+
+---
+
 ## 2017-05-01 23:57
 JRH
 
@@ -9,7 +23,7 @@ I worked out a development process with less overhead, using `docker-compose` to
 so that local code changes would be available to the container immediately. I had to specify the `src` directory (and reshuffle some files there) because I needed to exclude `node_modules` or else `require`s would fail altogether. I assume `npm install` needs some symlinks to remain intact or something. On the plus side, there's no need to install node modules locally. So updating after local backend file changes is now down to one command, `docker-compose restart backend`.
 
 
-Additionally, I now have some server-side code to create a table using `knex`, a SQL query builder that I'm currently favoring over `sequelize` because the latter is specifically an ORM. I'd like to keep everything in this project as functional as I can, and introducing ORM seems antithetical to that.
+Additionally, I now have some server-side code to create a table using `knex`, a SQL query builder that I'm currently favoring over `sequelize` because the latter is specifically an ORM. I'd like to keep everything in this project as faithful to functional programming as I can, and introducing ORM seems antithetical to that.
 
 ### Next Up
 Get the REST API to read and write. Also, do figure out migrations because I bet that will become relevant real soon. And bonus points for automating updates to the running container on every local file change.
