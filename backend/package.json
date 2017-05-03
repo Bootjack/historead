@@ -12,6 +12,7 @@
     "body-parser": "1.16.1",
     "express": "4.14.1",
     "knex": "0.13.0",
+    "moment": "2.18.1",
     "mysql": "2.13.0",
     "sequelize": "3.30.4"
   }
