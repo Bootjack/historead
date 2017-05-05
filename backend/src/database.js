@@ -1,6 +1,6 @@
 const knex = require('knex');
 const db = knex({
-  client: 'mysql',
+  client: 'postgresql',
   connection: {
     host: 'db',
     user: 'historead',
@@ -14,6 +14,8 @@ module.exports = new Promise((resolve, reject) => {
     console.log('Created migrations table.\n', table);
   });
   db.migrate.latest()
-    .then(() => resolve(db))
-    .catch(() => reject(db));
+    .catch(() => reject('Unable to migrate database'))
+    .then(() => db.seed.run())
+    .catch(() => reject('Unable to seed database'))
+    .then(() => resolve(db));
 });

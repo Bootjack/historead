@@ -1,3 +1,32 @@
+## 2017-05-04 23:15
+JRH
+
+Well, that went pretty well. The database is now switched over to Postgres and has appropriate constraints to enforce data integrity for events. I only hit two minor hiccups.
+
+First, similar to initially setting up Sequelize, where the dialects `mysql` and `mariadb` were not synonymous even though some documentation implied they were, the meager Knex documentation on its connection configuration includes `client: 'pg'` but I had to guess that it really required `client: 'postgresql'` in order to successfully connect. The only error message I got when it wouldn't was the cryptic warning `calling knex without a tableName is deprecated. Use knex.queryBuilder() instead.`
+
+Second, the whole motivation for switching to Postgres was its support for check constraints and for a while it looked like Knex didn't support them. And it kind of doesn't. There's no way to add `table.raw()` inside of a `createTable` callback, so what I ended up doing was chaining a completely separate `ALTER TABLE` query onto the `createTable` promise. It goes a little something like this:
+
+    return knex.schema.createTable('events', function (table) {
+      table.increments('id');
+      table.varchar('name', 255).notNullable();
+      // *snip*
+      table.index('end');
+    }).then(knex.raw(`ALTER TABLE events ADD CHECK (name <> '')`));
+
+### Next Up
+The backend service is currently configured so that whenever it starts it runs pending migrations and then re-seeds the database, which is pretty handy for development. Figuring out some environment configuration should definitely come soon. That goes for connection details like Postgres credentials, too.
+
+There's also some design work to be done on in-memory caching, something like a Redis caching layer, and/or a Redis queue for database transactions. Anything to remove the pattern of querying the database for every incoming HTTP request on the API.
+
+Also tucked away in those decisions is some thought in how to balance validating user-generated content in a community-centric, crowd-sourced sort of way. If this app ever grows beyond a hobby experiment, that kind of thing could make or break it.
+
+And lastly, it's going to be time soon for some rudimentary UI. That will be fun and a good chance to add another layer to the docker stack (a simple apache/nginx server with static front-end assets). But really, I just want to alleviate poking the app via `curl` all the time, novel though it may be.
+
+Oh man, one more thing. I just realized that the only `events` column I left nullable is the `end` date, because some events occur on only one date and so we can assume their start and end values are the same. But rather than apply that assumption in the application code, why not apply at insertion using a calculated `DEFAULT` clause? I'm not sure exactly how to write that, but Postgres must support it.
+
+---
+
 ## 2017-05-04 02:27
 JRH
 

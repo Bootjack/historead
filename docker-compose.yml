@@ -2,20 +2,17 @@ version: "3"
 
 services:
   db:
-    image: mariadb
+    image: postgres
     environment:
       # Changing these variables will not affect an existing volume.
       # Remove the existing volume first and re-run compose to apply changes.
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: historead
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: historead
+      POSTGRES_USER: historead
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: historead
     networks:
-      - webnet
-    ports:
-      - "3306:3306"
+      - backend
     volumes:
-      - "db-data:/var/lib/mysql"
+      - "pg-data:/var/lib/postgresql/data"
 
   backend:
     image: historead-backend
@@ -30,6 +27,7 @@ services:
       restart_policy:
         condition: on-failure
     networks:
+      - backend
       - webnet
     ports:
       - "8000:80"
@@ -55,7 +53,8 @@ services:
       - webnet
 
 volumes:
-  db-data:
+  pg-data:
 
 networks:
+  backend:
   webnet:
