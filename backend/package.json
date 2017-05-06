@@ -16,6 +16,6 @@
     "pg": "6.1.5"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node src/server.js"
   }
 }

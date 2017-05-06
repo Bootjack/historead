@@ -10,11 +10,12 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: historead
     networks:
-      - backend
+      - private
     volumes:
       - "pg-data:/var/lib/postgresql/data"
 
   backend:
+    build: ./backend
     image: historead-backend
     depends_on:
       - db
@@ -27,7 +28,7 @@ services:
       restart_policy:
         condition: on-failure
     networks:
-      - backend
+      - private
       - webnet
     ports:
       - "8001:80"
@@ -41,6 +42,7 @@ services:
       - ./backend/src:/usr/app/src
 
   frontend:
+    build: ./frontend
     image: historead-frontend
     volumes:
       # Map the host src directory to container src directory.
@@ -50,7 +52,8 @@ services:
       - ./frontend/src:/usr/app/src
       - frontend-dist:/usr/app/dist
 
-  static:
+  proxy:
+    build: ./proxy
     image: historead-proxy
     networks:
       - webnet
@@ -76,5 +79,5 @@ volumes:
   pg-data:
 
 networks:
-  backend:
+  private:
   webnet:
