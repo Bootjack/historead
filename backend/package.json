@@ -14,5 +14,8 @@
     "knex": "0.13.0",
     "moment": "2.18.1",
     "pg": "6.1.5"
+  },
+  "scripts": {
+    "start": "node server.js"
   }
 }

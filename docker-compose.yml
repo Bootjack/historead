@@ -30,7 +30,7 @@ services:
       - backend
       - webnet
     ports:
-      - "8000:80"
+      - "8001:80"
     volumes:
       # Map the host src directory to container src directory.
       # Run `docker-compose restart backend` to pick up local file changes.
@@ -39,6 +39,25 @@ services:
       - ./backend/migrations:/usr/app/migrations
       - ./backend/seeds:/usr/app/seeds
       - ./backend/src:/usr/app/src
+
+  frontend:
+    image: historead-frontend
+    volumes:
+      # Map the host src directory to container src directory.
+      # Run `docker-compose restart backend` to pick up local file changes.
+      # This is only appropriate in a dev environment.
+      # Note: Find a sustainable strategy for this (like multiple yml files)
+      - ./frontend/src:/usr/app/src
+      - frontend-dist:/usr/app/dist
+
+  static:
+    image: historead-proxy
+    networks:
+      - webnet
+    ports:
+      - "8000:80"
+    volumes:
+      - frontend-dist:/usr/share/nginx/static:ro
 
   visualizer:
     image: dockersamples/visualizer:stable
@@ -53,6 +72,7 @@ services:
       - webnet
 
 volumes:
+  frontend-dist:
   pg-data:
 
 networks:
