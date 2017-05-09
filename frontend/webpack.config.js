@@ -31,5 +31,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: ['src', 'node_modules']
-  }
+  },
+  watch: true
 };

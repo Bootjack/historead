@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connectEvents} from 'connectors/events';
 
-export default function EventList(props) {
+export function EventList(props) {
   return (
     <div className="hst-event-list">
       {props.events.map((event, i) => {
@@ -23,3 +24,5 @@ EventList.propTypes = {
 EventList.defaultProps = {
   events: []
 };
+
+export default connectEvents(EventList);
