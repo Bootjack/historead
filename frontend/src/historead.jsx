@@ -2,8 +2,13 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import EventList from 'components/event-list';
+import EventQueryForm from 'components/event-query-form';
 import SiteHeader from 'layout/site-header';
-import {fetchEvents} from 'connectors/events';
+
+require('normalize.css');
+require('styles/generic');
+require('styles/app');
+require('styles/headings');
 
 const rootNode = document.getElementById('hst-root');
 

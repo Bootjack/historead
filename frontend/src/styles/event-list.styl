@@ -1,0 +1,29 @@
+@require 'colors'
+
+.hst-event-list
+  display: flex
+  flex: 1 1 auto
+  flex-flow: column
+  margin: 0
+  padding: 0
+
+  .hst-event
+    align-items: center
+    background: $hst-light-gray
+    border-bottom: 1px solid $hst-white
+    color: $hst-dark-gray
+    display: flex
+    flex: 1 1 auto
+    flex-flow: column
+    justify-content: center
+
+    &:last-of-type
+      border-bottom: none
+
+    .hst-event-name
+      font-weight: 700
+      line-height: 1.2em
+
+    .hst-event-dates
+      color: $hst-gray
+      font-size: 0.8rem

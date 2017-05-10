@@ -13,13 +13,20 @@ module.exports = {
       exclude: /node_modules/,
       loader: "babel-loader"
     }, {
-      test: /\.less$/,
+      test: /\.css$/,
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader'
+      }]
+    }, {
+      test: /\.styl$/,
       use: [{
         loader: 'style-loader'
       }, {
         loader: 'css-loader'
       }, {
-        loader: 'less-loader'
+        loader: 'stylus-loader'
       }]
     }]
   },
@@ -29,7 +36,7 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.styl'],
     modules: ['src', 'node_modules']
   },
   watch: true
