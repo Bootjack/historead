@@ -11,7 +11,7 @@ module.exports = {
     rules: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: "babel-loader"
+      loader: 'babel-loader'
     }, {
       test: /\.css$/,
       use: [{
@@ -28,6 +28,9 @@ module.exports = {
       }, {
         loader: 'stylus-loader'
       }]
+    }, {
+      test: /\.(eot|svg|ttf|woff|woff2)$/,
+      loader: 'file-loader'
     }]
   },
   plugins: [

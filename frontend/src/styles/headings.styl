@@ -1,14 +1,37 @@
 @require 'colors'
 
 .hst-site-header
+  align-items: center
   background-color: $hst-bold
   color: $hst-white
-  font-family: serif
-  font-size: 2rem;
+  display: flex
+  flex-flow: row
   font-weight: 200
   margin: 0
   padding: 1rem
-  text-align: center
+
+  h1
+    flex: 1 1 auto
+
+.hst-site-menu
+  &-item
+    background-color: $hst-accent-primary
+    border-radius: 0.5rem
+    color: $hst-white
+    cursor: pointer
+    height: 1rem
+    margin: 0.5rem
+    padding: 0.5rem
+    width: 1rem
+
+    &:hover
+      background-color: $hst-white
+      color: $hst-accent-primary
+
+    &--active
+      background-color: $hst-white
+      color: $hst-accent-primary
+
 
 .hst-secondary-header
   background-color: $hst-dark-gray

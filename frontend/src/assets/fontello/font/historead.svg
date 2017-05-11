@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2017 by original authors @ fontello.com</metadata>
+<defs>
+<font id="historead" horiz-adv-x="1000" >
+<font-face font-family="historead" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="plus" unicode="&#xe800;" d="M0 209l0 282 359 0 0 359 282 0 0-359 359 0 0-282-359 0 0-359-282 0 0 359-359 0z" horiz-adv-x="1000" />
+
+<glyph glyph-name="search" unicode="&#xe801;" d="M0 8l186 186 2 0q-67 105-67 228 0 178 125 303t303 125 303-125 125-303-125-302-303-125q-106 0-197 48l-194-193z m311 415q0-98 70-168t168-69 168 69 70 168-70 168-168 70-168-70-70-168z" horiz-adv-x="977" />
+</font>
+</defs>
+</svg>

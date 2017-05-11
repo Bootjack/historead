@@ -34,7 +34,7 @@ export default class EventQueryForm extends React.Component {
 
   render() {
     return (
-      <form className="hst-event-query-form hst-secondary-header" onSubmit={this.handleSubmit}>
+      <form className="hst-secondary-header hst-event-query-form" onSubmit={this.handleSubmit}>
         <label>From
           <input onChange={this.handleStartChange} value={this.state.start}/>
         </label>
@@ -43,7 +43,7 @@ export default class EventQueryForm extends React.Component {
         </label>
       </form>
     );
-    
+
   }
 }
 
