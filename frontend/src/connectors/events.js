@@ -20,6 +20,17 @@ export function fetchEvents({start, end}) {
     .catch(err => console.log(err)); //eslint-disable-line
 }
 
+export function postEvent({name, start, end}) {
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  return fetch('api/events', {
+      body: JSON.stringify({name, start, end}),
+      headers,
+      method: 'POST'
+    })
+    .catch(err => console.log(err)); //eslint-disable-line
+}
+
 export function connectEvents(Child) {
   return class ConnectedChild extends React.Component {
     constructor() {

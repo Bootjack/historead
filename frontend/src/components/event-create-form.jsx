@@ -1,4 +1,5 @@
 import React from 'react';
+import {postEvent} from 'connectors/events';
 
 require('styles/event-create-form');
 
@@ -36,9 +37,17 @@ export default class EventCreateForm extends React.Component {
     this.setState({end: evt.target.value});
   }
 
+  handleSubmit = evt => {
+    evt.preventDefault();
+    postEvent(this.state);
+  }
+
   render() {
     return (
-      <form className="hst-secondary-header hst-event-create-form">
+      <form
+        className="hst-secondary-header hst-event-create-form"
+        onSubmit={this.handleSubmit}
+      >
         <div className="fieldset">
           <label>Name
             <input
