@@ -28,7 +28,14 @@ export function postEvent({name, start, end}) {
       headers,
       method: 'POST'
     })
-    .catch(err => console.log(err)); //eslint-disable-line
+    .catch(err => console.log(err)); // eslint-disable-line
+}
+
+export function deleteEvent({id}) {
+  return fetch(`api/events/${id}`, {
+    method: 'DELETE'
+  })
+  .catch(err => console.log(err)); // eslint-disable-line
 }
 
 export function connectEvents(Child) {
