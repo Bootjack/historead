@@ -10,21 +10,33 @@ function expandDate(input, forward) {
   return date.format('YYYY-MM-DD');
 }
 
-function getEventsFromStartToEnd(db, req, res, next) {
-  const start = expandDate(req.params.start);
-  const end = expandDate(req.params.end, true);
-  db.select().from('events')
-    .where(function() {this.where('start', '<', start).andWhere('end', '>', end)})
-    .orWhereBetween('start', [start, end])
-    .orWhereBetween('end', [start, end])
-    .then(events => res.json(events))
-    .catch(err => res.status(500).json({success: false, message: 'Unable to query events', error: err}));
-}
-
-function postEvents(db, req, res, next) {
+function createEvents(db, req, res, next) {
   db('events').insert(req.body)
     .then(ids => res.json({success: true, insertedIds: ids}))
     .catch(err => res.status(500).json({success: false, message: 'Unable to insert event', error: err}));
+}
+
+function retrieveEvents(query, res, next) {
+  query.then(events => res.json(events))
+    .catch(err => res.status(500).json({success: false, message: 'Unable to query events', error: err}));
+}
+
+function retrieveEventsFromStartToEnd(db, req, res, next) {
+  const start = expandDate(req.params.start);
+  const end = expandDate(req.params.end, true);
+  const query = db.select().from('events')
+    .where(function() {this.where('start', '<', start).andWhere('end', '>', end)})
+    .orWhereBetween('start', [start, end])
+    .orWhereBetween('end', [start, end]);
+  retrieveEvents(query, res, next);
+}
+
+function deleteEvent(db, req, res, next) {
+  db.del().from('events').where({id: req.params.id})
+    .then(affected => affected > 0
+      ? res.status(200).json({success: true})
+      : res.status(404).json({success: false, message: 'Matching event not found'}))
+    .catch(err => res.status(500).json({success: false, message: 'Unable to delete event', error: err}));
 }
 
 function attachDatabase(db, func) {
@@ -33,7 +45,8 @@ function attachDatabase(db, func) {
 
 module.exports = function (db) {
   const events = express.Router();
-  events.get('/from/:start/to/:end', attachDatabase(db, getEventsFromStartToEnd));
-  events.post('/', attachDatabase(db, postEvents));
+  events.post('/', attachDatabase(db, createEvents));
+  events.get('/from/:start/to/:end', attachDatabase(db, retrieveEventsFromStartToEnd));
+  events.delete('/:id/', attachDatabase(db, deleteEvent));
   return events;
 }
