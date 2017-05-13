@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2017 by original authors @ fontello.com</metadata>
+<defs>
+<font id="historead" horiz-adv-x="1000" >
+<font-face font-family="historead" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="plus" unicode="&#xe800;" d="M0 209l0 282 359 0 0 359 282 0 0-359 359 0 0-282-359 0 0-359-282 0 0 359-359 0z" horiz-adv-x="1000" />
+
+<glyph glyph-name="search" unicode="&#xe801;" d="M0 8l186 186 2 0q-67 105-67 228 0 178 125 303t303 125 303-125 125-303-125-302-303-125q-106 0-197 48l-194-193z m311 415q0-98 70-168t168-69 168 69 70 168-70 168-168 70-168-70-70-168z" horiz-adv-x="977" />
+
+<glyph glyph-name="pencil" unicode="&#xe802;" d="M0-143l68 343 274-273z m137 392l422 422 259-260-421-422z m531 494q2 39 31 69t69 31 66-25l131-131q25-26 24-66t-30-69-69-30-66 24l-131 131q-27 27-25 66z" horiz-adv-x="989" />
+
+<glyph glyph-name="tag" unicode="&#xe803;" d="M0 483l0 287q2 31 24 54t52 22l287 0q88-6 133-55l426-472q19-28 19-58t-19-52l-334-334q-25-21-57-21t-52 21l-424 475q-55 64-55 133z m125 164q2-31 23-52t51-20q32 0 52 22t21 50q0 33-23 54t-50 20q-33-2-53-23t-21-51z" horiz-adv-x="941" />
+
+<glyph glyph-name="flag" unicode="&#xe804;" d="M0-79l0 803q68 41 136 51t124-3 112-35 112-43 114-31 124 2 137 59l0-459q-52-53-109-67t-110 1-117 40-124 51-135 35-151-11l0-393-113 0z" horiz-adv-x="859" />
+
+<glyph glyph-name="trash" unicode="&#xe805;" d="M0 633l0 141 289 0 0 76 246 0 0-76 289 0 0-141-824 0z m43-783l0 676 738 0 0-676-738 0z" horiz-adv-x="824" />
+</font>
+</defs>
+</svg>

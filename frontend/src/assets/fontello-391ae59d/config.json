@@ -1,0 +1,46 @@
+{
+  "name": "historead",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "55e2ff85b1c459c383f46da6e96014b0",
+      "css": "plus",
+      "code": 59392,
+      "src": "elusive"
+    },
+    {
+      "uid": "e45e9f27ce40ba9837cc984076d98067",
+      "css": "search",
+      "code": 59393,
+      "src": "elusive"
+    },
+    {
+      "uid": "62b0580ee8edc3a3edfbf68a47c852d5",
+      "css": "pencil",
+      "code": 59394,
+      "src": "elusive"
+    },
+    {
+      "uid": "25acee28eb78eaa800b32bb6f20ebc62",
+      "css": "flag",
+      "code": 59396,
+      "src": "elusive"
+    },
+    {
+      "uid": "3ab2abf6f936d3e53ee8c184cedaed82",
+      "css": "trash",
+      "code": 59397,
+      "src": "elusive"
+    },
+    {
+      "uid": "630529f03c319c01101aa167181b650e",
+      "css": "tag",
+      "code": 59395,
+      "src": "elusive"
+    }
+  ]
+}

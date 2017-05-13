@@ -18,7 +18,7 @@ function EventListItem(props) {
       style={style}>
       <div className="hst-event-list-item-name">{event.name}</div>
       <div className="hst-event-list-item-dates">{start.format('YYYY-MM-DD')} to {end.format('YYYY-MM-DD')}</div>
-      <div className="hst-event-list-item-delete" onClick={() => deleteEvent(event)}>x</div>
+      <div className="icon-trash hst-event-list-item-delete" onClick={() => deleteEvent(event)}/>
     </li>
   );
 }
