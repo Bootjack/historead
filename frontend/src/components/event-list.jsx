@@ -57,4 +57,4 @@ EventList.defaultProps = {
   events: []
 };
 
-export default connectEvents(EventList);
+export default connectEvents('main', EventList);

@@ -3,6 +3,18 @@ import PropTypes from 'prop-types';
 import {fetchEvents} from 'connectors/events';
 
 export default class EventQueryForm extends React.Component {
+  static propTypes = {
+    channel: PropTypes.string,
+    debounceRate: PropTypes.number,
+    end: PropTypes.string,
+    start: PropTypes.string
+  }
+
+  static defaultProps = {
+    channel: 'main',
+    debounceRate: 600
+  }
+
   state = {
     start: '1900',
     end: '2000'
@@ -18,8 +30,9 @@ export default class EventQueryForm extends React.Component {
   }
 
   fetchEvents = () => {
+    const {channel} = this.props;
     const {start, end} = this.state;
-    fetchEvents({start, end})
+    fetchEvents(channel, {start, end})
   }
 
   handleEndChange = evt => {
@@ -46,13 +59,3 @@ export default class EventQueryForm extends React.Component {
 
   }
 }
-
-EventQueryForm.propTypes = {
-  debounceRate: PropTypes.number,
-  end: PropTypes.string,
-  start: PropTypes.string
-};
-
-EventQueryForm.defaultProps = {
-  debounceRate: 600
-};
