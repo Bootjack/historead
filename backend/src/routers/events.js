@@ -10,8 +10,18 @@ function expandDate(input, forward) {
   return date.format('YYYY-MM-DD');
 }
 
+function validateEvent(event) {
+  return {
+    name: event.name,
+    description: event.description,
+    start: expandDate(event.start, false),
+    end: expandDate(event.end || event.start, true)
+  };
+}
+
 function createEvents(db, req, res, next) {
-  db('events').insert(req.body)
+  const event = validateEvent(req.body);
+  db('events').insert(event)
     .then(ids => res.json({success: true, insertedIds: ids}))
     .catch(err => res.status(500).json({success: false, message: 'Unable to insert event', error: err}));
 }
@@ -22,7 +32,7 @@ function retrieveEvents(query, res, next) {
 }
 
 function retrieveEventsFromStartToEnd(db, req, res, next) {
-  const start = expandDate(req.params.start);
+  const start = expandDate(req.params.start, false);
   const end = expandDate(req.params.end, true);
   const query = db.select().from('events')
     .where(function() {this.where('start', '<', start).andWhere('end', '>', end)})

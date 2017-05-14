@@ -1,3 +1,32 @@
+## 2017-05-13 22:36
+JRH
+
+Throughout the past week, I've been building a simple React frontend. It shows a list of events and has form to query by start and end dates, which updates the list. There's a second form that allows the creation of new events, given a name, start, and end date. I grabbed an icon font from Fontello, which was pretty handy. In order to get webpack to resolve the imported CSS from Fontello, I did have to make a configuration change, adding the `file-loader` plugin like so
+
+    module: {
+      rules: [{
+        // *other rules*
+      }, {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file-loader'
+      }]
+    },
+
+The backend now has an `/api/events/:id` delete endpoint, which only serves to highlight the need for some sort of layer in between the API server and the database. Ideally, it would take some sort of consensus from multiple users before an event is actually deleted. Moving ahead with modifying, tagging, and grouping events will make this increasingly necessary.
+
+In the React application, I challenged myself to better understand the problem that a flux data store like Redux solves, and so I avoided using any existing library for that concern. Instead, I introduced the concept of connectors that manage subscriptions to different sets of data and also expose methods to alter those datasets by sending requests to the backend. I'm pretty pleased with the pattern I came up with. The `connectEvents` function will wrap any React component and provide it with an `events` property that will update any time new events are fetched from the connector. To support multiple simultaneous collections of events from the same connector, there is also a `channel` argument provided when a component subscribes. Otherwise, it would be impossible to show two separate lists of events side-by-side to compare two different categories (like, historical events next to episodes of a TV show).
+
+### Next Up
+Add a layer between the API server and the database, probably Redis, that aggregates requests and only proceeds with altering records once multiple users have expressed agreement. That deserves some more design thought. A similar Redis layer (or the same one) could also serve to queue all requests regardless of validation, so that event create requests couldn't unduly bog down the database itself.
+
+Olivia has mentioned that she imagines most users wanting to start at a simple search box that can query events by topic or keyword and suggest books and shows from a similar time period. So, that means getting search with auto-complete up and running.
+
+And of course, tagging. That's the next really juicy set of feature work.
+
+Further along, we also need to dig in to the whole side-by-side display thing I just mentioned. Displaying this information in a smart layout will take quite a few attempts, I think.
+
+---
+
 ## 2017-05-04 23:15
 JRH
 
