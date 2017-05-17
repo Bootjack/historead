@@ -1,7 +1,26 @@
+## 2017-05-17 08:22
+JRH
+
+I’m spending the morning trying to deploy this to AWS EC2. I feel like it will be easier to keep up momentum once I know I’ve got a complete end-to-end process worked out.
+
+In the meantime, I had some thoughts I wanted to get down regarding a tagging ecosystem for events. I’d like to keep the object definitions as simple as possible, with really only two object types in the system (aside from maybe users and auth concerns): `events` and `tags`. There will need to be a many-to-many relationship between the two, and some nuance about the nature of the relationships stored partly in the tag and partly in the relationship itself.
+
+### Types of tags
+- Category
+- Group
+
+### Types of event-tag relationships
+- Group primary event
+- Group subordinate event
+
+I want to add specifics for things like people (born-died, reign/role start-end, discovery) and location (geographic coordinates vs. nation state). If there's a way to leave such details out of the database schema, that would be preferable.
+
+---
+
 ## 2017-05-13 22:36
 JRH
 
-Throughout the past week, I've been building a simple React frontend. It shows a list of events and has form to query by start and end dates, which updates the list. There's a second form that allows the creation of new events, given a name, start, and end date. I grabbed an icon font from Fontello, which was pretty handy. In order to get webpack to resolve the imported CSS from Fontello, I did have to make a configuration change, adding the `file-loader` plugin like so
+Throughout the past week, I've been building a simple React frontend. It shows a list of events and has a form to query by start and end dates, which updates the list. There's a second form that allows the creation of new events, given a name, start, and end date. I grabbed an icon font from Fontello, which was pretty handy. In order to get webpack to resolve the imported CSS from Fontello, I did have to make a configuration change, adding the `file-loader` plugin like so
 
     module: {
       rules: [{
@@ -12,7 +31,7 @@ Throughout the past week, I've been building a simple React frontend. It shows a
       }]
     },
 
-The backend now has an `/api/events/:id` delete endpoint, which only serves to highlight the need for some sort of layer in between the API server and the database. Ideally, it would take some sort of consensus from multiple users before an event is actually deleted. Moving ahead with modifying, tagging, and grouping events will make this increasingly necessary.
+The backend now has an `/api/events/:id` delete endpoint, which only serves to highlight the need for some sort of layer in between the API server and the database. Ideally, it would take a consensus from multiple users before an event is actually deleted. Moving ahead with modifying, tagging, and grouping events will make this increasingly necessary.
 
 In the React application, I challenged myself to better understand the problem that a flux data store like Redux solves, and so I avoided using any existing library for that concern. Instead, I introduced the concept of connectors that manage subscriptions to different sets of data and also expose methods to alter those datasets by sending requests to the backend. I'm pretty pleased with the pattern I came up with. The `connectEvents` function will wrap any React component and provide it with an `events` property that will update any time new events are fetched from the connector. To support multiple simultaneous collections of events from the same connector, there is also a `channel` argument provided when a component subscribes. Otherwise, it would be impossible to show two separate lists of events side-by-side to compare two different categories (like, historical events next to episodes of a TV show).
 
