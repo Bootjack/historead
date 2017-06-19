@@ -37,7 +37,8 @@ function retrieveEventsFromStartToEnd(db, req, res, next) {
   const query = db.select().from('events')
     .where(function() {this.where('start', '<', start).andWhere('end', '>', end)})
     .orWhereBetween('start', [start, end])
-    .orWhereBetween('end', [start, end]);
+    .orWhereBetween('end', [start, end])
+    .orderBy('start', 'asc');
   retrieveEvents(query, res, next);
 }
 
