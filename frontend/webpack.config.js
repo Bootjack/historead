@@ -41,6 +41,5 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.styl'],
     modules: ['src', 'node_modules']
-  },
-  watch: true
+  }
 };

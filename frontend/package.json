@@ -39,6 +39,6 @@
     "webpack": "2.5.0"
   },
   "scripts": {
-    "start": "webpack"
+    "start": "./node_modules/.bin/webpack"
   }
 }

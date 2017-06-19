@@ -15,7 +15,8 @@ services:
       - "pg-data:/var/lib/postgresql/data"
 
   backend:
-    image: docker.bootjacked.com/historied-backend
+    build: ./backend
+    image: historead-backend
     depends_on:
       - db
     deploy:
@@ -29,16 +30,29 @@ services:
     networks:
       - private
       - webnet
-    ports:
-      - "8001:80"
+    volumes:
+      # Map the host src directory to container src directory.
+      # Run `docker-compose restart backend` to pick up local file changes.
+      # This is only appropriate in a dev environment.
+      # Note: Find a sustainable strategy for this (like multiple yml files)
+      - "./backend/migrations:/usr/app/migrations"
+      - "./backend/seeds:/usr/app/seeds"
+      - "./backend/src:/usr/app/src"
 
   frontend:
-    image: docker.bootjacked.com/historied-frontend
+    build: ./frontend
+    image: historead-frontend
     volumes:
+      # Map the host src directory to container src directory.
+      # Run `docker-compose restart backend` to pick up local file changes.
+      # This is only appropriate in a dev environment.
+      # Note: Find a sustainable strategy for this (like multiple yml files)
+      - "./frontend/src:/usr/app/src"
       - "frontend-dist:/usr/app/dist"
 
   proxy:
-    image: docker.bootjacked.com/historied-proxy
+    build: ./proxy
+    image: historead-proxy
     networks:
       - webnet
     ports:
