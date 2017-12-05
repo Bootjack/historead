@@ -1,5 +1,5 @@
 import React from 'react';
-import {postEvent} from 'connectors/events';
+import {createEvent} from 'connectors/events';
 
 require('styles/event-create-form');
 
@@ -39,7 +39,7 @@ export default class EventCreateForm extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-    postEvent(this.state);
+    createEvent(this.state);
   }
 
   render() {

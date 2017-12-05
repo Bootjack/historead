@@ -1,3 +1,13 @@
+## 2017-06-27 14:43
+JRH
+
+The site has been deployed on a Digital Ocean droplet for almost two weeks now. I abandoned AWS pretty early on and instead used Digital Ocean tutorials for first creating a private docker registry and then for setting up a server to run a `docker-compose up` command as a service. So now http://historied.bootjacked.com is a thing. I set up free auto-renewing SSL for the docker registry and I'll need to do the same for the app.
+
+This is beach week in the Outer Banks, NC. So I'm starting with some softball tweaks to the existing backend (chronological sort) and frontend (spacing between events on a timeline).
+
+### Next Up
+Later in the week I’m hoping to tackle the whole concept of tagging, as outlined earlier, starting with the database schema changes.
+
 ## 2017-05-17 08:22
 JRH
 

@@ -35,7 +35,7 @@ export function fetchEvents(channel, {start, end}) {
     .catch(err => console.log(err)); //eslint-disable-line
 }
 
-export function postEvent({name, start, end}) {
+export function createEvent({name, start, end}) {
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
   const options = {
